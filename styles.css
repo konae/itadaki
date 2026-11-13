@@ -126,7 +126,7 @@ line-height:.95}
 color:#819587;
 font-weight:400}
 .heroCopy>p:not(.eyebrow){
-width:370px;
+width:min(370px,30vw);
 color:var(--muted);
 margin:0 0 32px;
 font-size:15px;
