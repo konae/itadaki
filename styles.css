@@ -1,0 +1,473 @@
+/* Café Itadaki — static preview. No build dependencies. */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { line-height: 1.5; -webkit-text-size-adjust: 100%; }
+h1, h2, h3 { font-size: inherit; font-weight: inherit; }
+b, strong { font-weight: bolder; }
+img { display: block; max-width: 100%; height: auto; }
+:root{
+--ink:#26312c;
+--muted:#6f7671;
+--line:#e7eae7;
+--mist:#f5f7f5;
+--sage:#dbe8d9;
+--green:#244b36}
+*{
+box-sizing:border-box}
+html{
+scroll-behavior:smooth}
+body{
+color:var(--ink);
+background:#fff;
+margin:0;
+font-family:Arial,Hiragino Kaku Gothic ProN,sans-serif}
+a{
+color:inherit;
+text-decoration:none}
+.wrap{
+max-width:1240px;
+margin:auto}
+.nav{
+z-index:3;
+background:#fffffff5;
+border-bottom:1px solid #26312c1f;
+justify-content:space-between;
+align-items:center;
+width:100%;
+height:94px;
+padding:0 5vw;
+display:flex;
+position:absolute}
+.brand{
+align-items:center;
+gap:13px;
+display:flex}
+.brand b,.footerBrand b{
+letter-spacing:.12em;
+font-family:Hiragino Mincho ProN,serif;
+font-size:25px;
+font-weight:500}
+.brand span,.footerBrand span{
+font-family:Georgia,serif;
+font-size:17px}
+.nav nav{
+letter-spacing:.08em;
+gap:34px;
+font-size:12px;
+display:flex}
+.order{
+background:var(--green);
+color:#fff;
+letter-spacing:.08em;
+justify-content:space-between;
+align-items:center;
+gap:36px;
+padding:17px 22px;
+font-size:12px;
+display:inline-flex}
+.orderSmall{
+padding:14px 18px}
+.hero{
+min-height:930px;
+padding-top:94px;
+position:relative}
+.photo{
+background:linear-gradient(135deg,#f3f6f2,#e9eee9);
+position:relative;
+overflow:hidden}
+.photo:before{
+content:"";
+aspect-ratio:1;
+filter:blur(1px);
+background:#ffffff8c;
+border-radius:50%;
+width:55%;
+position:absolute;
+top:10%;
+right:8%}
+.photo span{
+color:#79817c;
+letter-spacing:.1em;
+text-transform:uppercase;
+font-size:11px;
+position:absolute;
+bottom:25px;
+left:28px}
+.photo small{
+letter-spacing:.18em;
+color:#9ca39f;
+margin-top:6px;
+font-size:8px;
+display:block}
+.heroPhoto{
+width:57vw;
+height:700px;
+position:absolute;
+top:145px;
+right:5vw}
+.heroCopy{
+z-index:2;
+position:absolute;
+top:260px;
+left:7vw}
+.eyebrow,.sectionNo{
+letter-spacing:.22em;
+color:#667069;
+font-size:10px;
+font-weight:700}
+.hero h1,.intro h2,.hands h2,.season h2,.orderSection h2{
+letter-spacing:-.04em;
+margin:25px 0;
+font-family:Georgia,Times New Roman,serif;
+font-weight:400}
+.hero h1{
+font-size:clamp(58px,7vw,108px);
+line-height:.95}
+.hero h1 em{
+color:#819587;
+font-weight:400}
+.heroCopy>p:not(.eyebrow){
+width:370px;
+color:var(--muted);
+margin:0 0 32px;
+font-size:15px;
+line-height:1.8}
+.scroll{
+letter-spacing:.18em;
+font-size:9px;
+position:absolute;
+bottom:44px;
+left:7vw}
+.scroll span{
+margin-left:15px}
+.intro{
+grid-template-columns:1fr 2.1fr;
+gap:60px;
+padding:160px 5vw;
+display:grid}
+.intro>div{
+max-width:800px}
+.intro h2{
+margin-top:0;
+font-size:clamp(42px,5vw,73px);
+line-height:1.08}
+.intro .lead{
+color:#435047;
+font-family:Georgia,serif;
+font-size:23px;
+line-height:1.6}
+.intro>div>p:last-child{
+max-width:570px;
+color:var(--muted);
+line-height:1.9}
+.hands{
+grid-template-columns:1.2fr 1fr;
+min-height:670px;
+display:grid}
+.hands>.photo{
+background:linear-gradient(145deg,#eef3ef,#dfe8e0)}
+.handsText{
+background:var(--mist);
+padding:115px 9vw}
+.hands h2{
+font-size:56px;
+line-height:1.1}
+.handsText>p:not(.sectionNo){
+color:var(--muted);
+max-width:450px;
+line-height:1.9}
+.verbs{
+border-top:1px solid #d9deda;
+grid-template-columns:1fr 1fr;
+margin-top:70px;
+display:grid}
+.verbs span{
+letter-spacing:.18em;
+border-bottom:1px solid #d9deda;
+padding:18px 0;
+font-size:10px}
+.favorites{
+padding:150px 5vw}
+.favorites>.sectionNo{
+text-align:center;
+margin-bottom:48px}
+.cards{
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+display:grid}
+.cards article>.photo{
+height:450px}
+.cards article:nth-child(2)>.photo{
+margin-top:50px}
+.cards article:nth-child(3)>.photo{
+margin-top:100px}
+.cards h3{
+margin:23px 0 8px;
+font-family:Georgia,serif;
+font-size:26px;
+font-weight:400}
+.cards p{
+color:var(--muted);
+font-size:13px}
+.menuNote{
+color:var(--muted);
+margin-top:80px;
+font-size:12px;
+text-align:center!important}
+.season{
+background:#f0f5f0;
+grid-template-columns:.85fr 1.15fr;
+min-height:700px;
+display:grid}
+.seasonCopy{
+padding:120px 8vw}
+.season h2{
+font-size:72px;
+line-height:.95}
+.seasonCopy>p:not(.sectionNo){
+color:var(--muted);
+max-width:420px;
+line-height:1.9}
+.seasonCopy>a{
+border-bottom:1px solid var(--ink);
+gap:65px;
+margin-top:28px;
+padding-bottom:10px;
+font-size:12px;
+display:inline-flex}
+.season>.photo{
+background:linear-gradient(140deg,#f5f0e8,#e9e1d5);
+margin:55px}
+.orderSection{
+text-align:center;
+padding:150px 5vw}
+.orderSection h2{
+font-size:64px;
+line-height:1.08}
+.orderLinks{
+border-top:1px solid var(--line);
+max-width:720px;
+margin:55px auto 0}
+.orderLinks a{
+border-bottom:1px solid var(--line);
+align-items:center;
+min-height:74px;
+padding:0 25px;
+font-family:Georgia,serif;
+font-size:20px;
+display:flex}
+.orderLinks a span{
+margin-left:auto}
+.orderLinks .primary{
+background:var(--green);
+color:#fff;
+text-align:left;
+padding:22px 25px}
+.orderLinks .primary b{
+font-weight:400}
+.orderLinks .primary small{
+opacity:.7;
+letter-spacing:.08em;
+margin-left:20px;
+font:10px Arial,sans-serif}
+footer{
+border-top:1px solid var(--line);
+background:#f7f8f7;
+grid-template-columns:2fr 1fr 1fr;
+gap:70px;
+padding:85px 7vw 100px;
+font-size:13px;
+line-height:1.8;
+display:grid}
+.footerBrand{
+flex-direction:column;
+align-items:flex-start;
+display:flex}
+.footerBrand span{
+margin-top:5px}
+.footerBrand p{
+color:var(--muted);
+margin-top:35px}
+.footerLabel{
+letter-spacing:.18em;
+font-size:9px;
+font-weight:700}
+.footerLabel i{
+color:#a35f50;
+margin-left:8px;
+font-style:normal}
+.footerLabel~a,.footerLabel~p{
+margin:17px 0;
+display:block}
+.mobileOrder{
+display:none}
+@media (width<=800px){
+.nav{
+height:72px;
+padding:0 20px}
+.nav nav,.orderSmall{
+display:none}
+.hero{
+flex-direction:column;
+min-height:780px;
+padding-top:72px;
+display:flex}
+.heroPhoto{
+order:2;
+width:calc(100% - 40px);
+height:390px;
+margin:30px 20px 0;
+position:relative;
+top:auto;
+right:auto}
+.heroCopy{
+padding:70px 25px 0;
+position:relative;
+top:auto;
+left:auto}
+.hero h1{
+font-size:54px}
+.heroCopy>p:not(.eyebrow){
+width:auto}
+.scroll{
+display:none}
+.intro{
+padding:100px 25px;
+display:block}
+.intro>.sectionNo{
+margin-bottom:40px}
+.intro h2{
+font-size:40px}
+.intro .lead{
+font-size:19px}
+.hands{
+display:block}
+.hands>.photo{
+height:480px}
+.handsText{
+padding:80px 25px}
+.hands h2{
+font-size:45px}
+.favorites{
+padding:100px 20px}
+.cards{
+display:block}
+.cards article{
+margin-bottom:55px}
+.cards article>.photo,.cards article:nth-child(2)>.photo,.cards article:nth-child(3)>.photo{
+height:390px;
+margin-top:0}
+.season{
+flex-direction:column;
+display:flex}
+.seasonCopy{
+padding:90px 25px}
+.season h2{
+font-size:53px}
+.season>.photo{
+order:-1;
+height:430px;
+margin:0 20px 30px}
+.orderSection{
+padding:100px 22px}
+.orderSection h2{
+font-size:41px}
+.orderLinks .primary small{
+display:none}
+footer{
+grid-template-columns:1fr;
+gap:40px;
+padding:70px 25px 110px}
+.mobileOrder{
+z-index:10;
+background:var(--green);
+color:#fff;
+justify-content:space-between;
+padding:18px 20px;
+font-size:13px;
+display:flex;
+position:fixed;
+bottom:12px;
+left:12px;
+right:12px;
+box-shadow:0 8px 30px #00000024}
+}
+.photo{
+background:#f5f5f2;
+margin:0}
+.photo:before{
+display:none}
+.photo img{
+object-fit:cover;
+width:100%;
+height:100%;
+display:block}
+.photo figcaption{
+color:#67706b;
+letter-spacing:.11em;
+text-transform:uppercase;
+-webkit-backdrop-filter:blur(8px);
+backdrop-filter:blur(8px);
+background:#ffffffe0;
+padding:7px 10px;
+font-size:8px;
+position:absolute;
+bottom:16px;
+left:18px}
+.heroPhoto img,.hands>.photo img{
+object-position:center}
+.cropOnigiri img{
+object-position:77% 68%;
+transform:scale(1.45)}
+.cropKatsu img{
+object-position:56% 12%;
+transform:scale(1.25)}
+.cropMatcha img{
+object-position:92% 5%;
+transform:scale(1.6)}
+.cropCurryCard img{
+object-position:20% 72%;
+transform:scale(1.13)}
+.cropOmurice img{
+object-position:50% 35%;
+transform:scale(1.28)}
+.cropCurry img{
+object-position:20% 72%;
+transform:scale(1.13)}
+@media (width<=800px){
+.heroPhoto img{
+object-position:66% center}
+.photo figcaption{
+font-size:7px;
+bottom:10px;
+left:10px}
+.cropOnigiri img{
+transform:scale(1.25)}
+.cropKatsu img{
+transform:scale(1.15)}
+.cropMatcha img{
+transform:scale(1.35)}
+}
+.brand{
+gap:0;
+width:76px;
+height:76px}
+.brand img{
+object-fit:contain;
+width:100%;
+height:100%;
+display:block}
+@media (width<=800px){
+.brand{
+width:58px;
+height:58px}
+.hero h1{
+font-size:48px}
+}
+
+
+/* Keyboard navigation and reduced-motion support. */
+.skipLink { position: fixed; top: -100px; left: 16px; z-index: 20; padding: 12px 20px; background: white; color: var(--ink); }
+.skipLink:focus { top: 12px; }
+a:focus-visible { outline: 3px solid #aa6b37; outline-offset: 5px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media (max-width: 380px) { .hero h1 { font-size: 42px; } }
