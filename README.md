@@ -25,8 +25,7 @@ Bluehostへの本番転送、ChatGPTから本番公開を起動する接続、Dr
 
 ## 公開前の確認事項
 トップや料理一覧にはたたき台のサンプル写真が残っています。営業時間は未確認です。
-Featured DishはPork Katsu Demi-Glace Omurice（$24.95）。料理名・説明・価格の根拠はフードメニューr18です。
-特集写真は既存のカツのせオムライスで、デミグラスソースは写っていません。写真内にその旨を明記しています。
+Featured DishはPork Katsu Classic Omurice（$21.95）。料理名・説明・価格の根拠はフードメニューr18のPork Katsu Classicです。特集には既存のカツのせオムライス写真を使用しています。
 本番では確認用のnoindex・robots.txtを見直します。
 
 たたき台: https://cafe-itadaki-clean.michiya65371.chatgpt.site/
