@@ -1,0 +1,27 @@
+name: Check publication setup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/**'
+      - '.github/workflows/check-publication.yml'
+      - '.github/workflows/publish-bluehost.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Check static site
+        run: python3 check_site.py
+      - name: Check packaging and recovery without production access
+        run: PYTHONDONTWRITEBYTECODE=1 python3 automation/test_publish_bluehost.py
+      - name: Prepare public files without production access
+        run: python3 automation/publish_bluehost.py prepare --output "$RUNNER_TEMP/itadaki-publication-check"
