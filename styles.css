@@ -484,3 +484,8 @@ a:focus-visible { outline: 3px solid #aa6b37; outline-offset: 5px; }
 .dishOmurice img { object-position: left bottom; transform: scale(1.38); transform-origin: left bottom; }
 .dishCurry img { object-position: left bottom; transform: scale(1.4); transform-origin: left bottom; }
 .dishRamen img { object-position: left bottom; transform: scale(1.32); transform-origin: left bottom; }
+
+/* Preserve the crop across screen widths instead of making narrow cards excessively tall. */
+.cards article > .photo,
+.cards article:nth-child(2) > .photo,
+.cards article:nth-child(3) > .photo { height: auto; aspect-ratio: 4 / 5; }
