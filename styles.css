@@ -471,3 +471,9 @@ font-size:48px}
 a:focus-visible { outline: 3px solid #aa6b37; outline-offset: 5px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 @media (max-width: 380px) { .hero h1 { font-size: 42px; } }
+
+/* Featured dish: keep the full product name readable beside the photograph. */
+.season h2 { font-size: clamp(40px, 4.1vw, 60px); line-height: 1.02; }
+.seasonCopy .featurePrice { color: var(--green); font: 24px Georgia, serif; margin-bottom: 24px; }
+.featuredPhoto img { object-position: center; }
+@media (max-width: 800px) { .season h2 { font-size: 48px; } }
