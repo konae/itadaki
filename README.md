@@ -24,7 +24,8 @@ Bluehostへの本番転送、ChatGPTから本番公開を起動する接続、Dr
 今後の本番転送では、確認したコミットと同じファイルを使用します。本番転送対象はHTML・CSS・画像・faviconです。
 
 ## 公開前の確認事項
-トップとおにぎり作りの写真には、たたき台のサンプルが残っています。
+HEROはユーザー提供の実店舗写真（hero-cafe-interior.jpg）に差し替え済みです。AIによる内装・人物の変更はしていません。
+おにぎり作りの写真には、たたき台のサンプルが残っています。
 料理一覧3枚はお店の写真をもとに、AIで背景と光をそろえた補正案を使用しています。
 掲載用はomurice-plain-retouched.jpg、curry-retouched.jpg、ramen-retouched.jpg。原本は残しています。おにぎり原本：https://drive.google.com/file/d/1JwYWIko9GXo3jvrYaGWMns6r_K_z8GV-/view
 カレー原本はメニュー素材08-pork-katsu-curry.jpg。ラーメン原本は共有Driveの12-2 Spicy Chashu Miso_Angle.pngです：
