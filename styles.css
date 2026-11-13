@@ -483,4 +483,4 @@ a:focus-visible { outline: 3px solid #aa6b37; outline-offset: 5px; }
 /* Actual café dishes replace the shared sample collage. */
 .dishOnigiri img { object-position: center; transform: none; }
 .dishCurry img { object-position: center; }
-.dishOmurice img { object-position: 50% 50%; }
+.dishRamen img { object-position: 50% 50%; }

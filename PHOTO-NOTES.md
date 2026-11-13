@@ -1,5 +1,11 @@
 # Photo retouching notes
 
+Current third food card: Ramen. Source is Drive file `1iD8B76slky0qb4IS0g8kBnzaLPSK5oak` (12-2 Spicy Chashu Miso_Angle.png); preserved as ramen-source.jpg. Published derivative: ramen-retouched.jpg. The original photograph includes the red spicy-miso dollop.
+
+## Ramen prompt
+
+Use case: precise-object-edit and lighting-weather. Image 1 is the EDIT TARGET: an actual Café Itadaki ramen photograph. Image 2 is a STYLE REFERENCE ONLY for the warm light-oak tabletop, soft window light and natural color treatment; do not copy any food or plate from image 2. Retouch image 1 to match the existing website food card series, portrait 4:5 composition. Preserve the actual black bowl and exact ramen ingredients and quantities: yellow noodles in tan miso broth, one chashu slice, one half soft-cooked egg, corn, two large nori sheets, one red spicy miso dollop. Preserve the real food arrangement, irregularities and bowl shape. Replace only metal kitchen counter and all surrounding kitchen clutter with the quiet light-oak table. Soften hard flash, use warm natural daylight, retain appetizing golden broth and real egg/seaweed texture. Bowl fills about 75% of the frame with enough room for a tall website crop. No new toppings, no scallions, no extra meat or eggs, no invented steam, no added sauce, no props, no text, no logo. Photorealistic and faithful to the real dish, not idealized.
+
 These are AI-retouched derivatives of actual café photographs, created with the built-in image generation tool. Source photographs are preserved in this repository. The Featured Dish still uses its original photograph.
 
 ## Shared prompt
