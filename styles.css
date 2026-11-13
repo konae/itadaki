@@ -479,3 +479,8 @@ a:focus-visible { outline: 3px solid #aa6b37; outline-offset: 5px; }
 @media (max-width: 800px) { .season h2 { font-size: 48px; } }
 
 .season h2 span { white-space: nowrap; }
+
+/* Actual café dishes replace the shared sample collage. */
+.dishOnigiri img { object-position: center; transform: scale(1.7); transform-origin: 50% 60%; }
+.dishCurry img { object-position: 58% 50%; }
+.dishOmurice img { object-position: 50% 50%; }

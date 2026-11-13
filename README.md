@@ -24,7 +24,9 @@ Bluehostへの本番転送、ChatGPTから本番公開を起動する接続、Dr
 今後の本番転送では、確認したコミットと同じファイルを使用します。本番転送対象はHTML・CSS・画像・faviconです。
 
 ## 公開前の確認事項
-トップや料理一覧にはたたき台のサンプル写真が残っています。営業時間は未確認です。
+トップとおにぎり作りの写真には、たたき台のサンプルが残っています。
+料理一覧3枚はお店の写真に差し替え済みです。おにぎり原本：https://drive.google.com/file/d/1JwYWIko9GXo3jvrYaGWMns6r_K_z8GV-/view
+カレーはメニュー素材08-pork-katsu-curry.jpg、オムライスはメニュー素材06-pork-katsu-served-on-omurice.pngを使用しています。営業時間は未確認です。
 Featured DishはPork Katsu Classic Omurice（$21.95）。料理名・説明・価格の根拠はフードメニューr18のPork Katsu Classicです。特集には既存のカツのせオムライス写真を使用しています。
 本番では確認用のnoindex・robots.txtを見直します。
 
