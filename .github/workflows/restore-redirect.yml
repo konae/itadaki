@@ -1,0 +1,48 @@
+name: Restore legacy Instagram redirect
+
+on:
+  push:
+    branches: [main]
+    paths: ['.redirect-request.json']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: itadaki-bluehost-production
+  cancel-in-progress: false
+
+jobs:
+  restore:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out recovery code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Validate redirect request
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          request = json.loads(Path('.redirect-request.json').read_text())
+          if request.get('mode') != 'legacy-instagram' or not request.get('request_id'):
+              raise SystemExit('Invalid or missing explicit legacy redirect request')
+          PY
+      - name: Verify legacy redirect and back up live configuration
+        env:
+          BLUEHOST_FTP_PASSWORD: ${{ secrets.BLUEHOST_FTP_PASSWORD }}
+        run: python3 automation/restore_redirect.py prepare --output "$RUNNER_TEMP/itadaki-redirect"
+      - name: Preserve configuration backup before changing production
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: bluehost-redirect-before-${{ github.run_id }}
+          path: ${{ runner.temp }}/itadaki-redirect/backup
+          if-no-files-found: error
+          retention-days: 30
+      - name: Restore legacy redirect and verify HTTPS
+        env:
+          BLUEHOST_FTP_PASSWORD: ${{ secrets.BLUEHOST_FTP_PASSWORD }}
+        run: python3 automation/restore_redirect.py apply --output "$RUNNER_TEMP/itadaki-redirect"
