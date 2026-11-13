@@ -30,7 +30,7 @@ HEROはユーザー提供の実店舗写真から、AIで着席しているお�
 掲載用はomurice-plain-retouched.jpg、curry-retouched.jpg、ramen-retouched.jpg。原本は残しています。おにぎり原本：https://drive.google.com/file/d/1JwYWIko9GXo3jvrYaGWMns6r_K_z8GV-/view
 カレー原本はメニュー素材08-pork-katsu-curry.jpg。ラーメン原本は共有Driveの12-2 Spicy Chashu Miso_Angle.pngです：
 https://drive.google.com/file/d/1iD8B76slky0qb4IS0g8kBnzaLPSK5oak/view
-元写真の辛味噌トッピングも残しています。営業時間は未確認です。
+元写真の辛味噌トッピングも残しています。営業時間はドリンク・デザートメニューv28に合わせ、日〜金9:00〜17:30（L.O.17:00）、土9:00〜19:30（L.O.19:00）に修正済みです。
 Featured DishはPork Katsu Classic Omurice（$21.95）。料理名・説明・価格の根拠はフードメニューr18のPork Katsu Classicです。特集には既存のカツのせオムライス写真を使用しています。
 本番では確認用のnoindex・robots.txtを見直します。
 
