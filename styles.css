@@ -481,6 +481,6 @@ a:focus-visible { outline: 3px solid #aa6b37; outline-offset: 5px; }
 .season h2 span { white-space: nowrap; }
 
 /* Actual café dishes replace the shared sample collage. */
-.dishOnigiri img { object-position: center; transform: scale(1.7); transform-origin: 50% 60%; }
-.dishCurry img { object-position: 58% 50%; }
+.dishOnigiri img { object-position: center; transform: none; }
+.dishCurry img { object-position: center; }
 .dishOmurice img { object-position: 50% 50%; }
