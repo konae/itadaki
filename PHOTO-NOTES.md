@@ -30,3 +30,10 @@ Edit target: actual sliced pork katsu on Japanese curry and white rice on the or
 
 Edit target: actual pork katsu omurice, fluffy scrambled-style yellow egg with cutlet slices and shredded cabbage on the original white plate. Keep the precise actual egg preparation, all cutlet pieces and cabbage; do not turn this into a closed French omelet and do not add sauce or garnish. Keep food arrangement intact. Soften the hard light and replace only the dark wood surround with the same quiet warm light-oak table.
 
+
+
+## HERO customer removal — 2026-11-13
+- Source: user-supplied actual café interior, hero-cafe-interior.jpg.
+- Published asset: hero-cafe-interior-no-customers.jpg.
+- Built-in image generation edit: remove the two seated customers and reconstruct the empty seating area. Preserve staff behind the counter, architecture, teal counter, lighting, signs and framing.
+- Prompt: Remove only the two seated customers at the middle-left table, including legs and feet; naturally reconstruct the chairs, table surface, wall and floor. Preserve the staff member behind the counter and the cafe interior, lighting, colors, signs and composition. No redesign or added objects.
