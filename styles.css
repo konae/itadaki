@@ -481,6 +481,6 @@ a:focus-visible { outline: 3px solid #aa6b37; outline-offset: 5px; }
 .season h2 span { white-space: nowrap; }
 
 /* Actual café dishes replace the shared sample collage. */
-.dishOmurice img { object-position: center; transform: scale(1.45); transform-origin: 46% 54%; }
-.dishCurry img { object-position: center; transform: scale(1.65); transform-origin: 54% 58%; }
-.dishRamen img { object-position: center; transform: scale(1.4); transform-origin: 58% 58%; }
+.dishOmurice img { object-position: left bottom; transform: scale(1.38); transform-origin: left bottom; }
+.dishCurry img { object-position: left bottom; transform: scale(1.4); transform-origin: left bottom; }
+.dishRamen img { object-position: left bottom; transform: scale(1.32); transform-origin: left bottom; }
