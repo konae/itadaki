@@ -19,9 +19,10 @@ Settings → Pages → Build and deploymentで、Deploy from a branch、main、/
 mainの更新に合わせてGitHub Pagesが確認用サイトを更新します。
 通常、確認ページはインターネットから閲覧できます。noindexとrobots.txtはアクセス制限ではありません。
 
-## 今後の設定
-Bluehostへの本番転送、ChatGPTから本番公開を起動する接続、Drive・Notion自動同期はまだ設定していません。
-今後の本番転送では、確認したコミットと同じファイルを使用します。本番転送対象はHTML・CSS・画像・faviconです。
+## 本番公開と今後の設定
+2026年11月13日にBluehostへFTPSで本番公開済みです。本番の掲載内容はf395cd6を基準とし、検索除外の解除とindex.htmlの優先設定を適用しています。公開前に上書き対象をローカルへ非公開でバックアップしています。
+ChatGPTから本番公開を起動するクラウド接続、オーナー側の編集接続、Drive・Notion自動同期はまだ設定していません。
+本番転送では、確認したコミットと同じ内容を使用し、本番固有の設定差分を記録します。本番転送対象はHTML・CSS・掲載画像・favicon・robots.txtおよび必要なサーバー設定です。仕様書や原本・バックアップは転送しません。
 
 ## 公開前の確認事項
 HEROはユーザー提供の実店舗写真から、AIで着席しているお客さん2名を除去した hero-cafe-interior-no-customers.jpg を使用しています。カウンター内のスタッフは残しています。原本は hero-cafe-interior.jpg です。
@@ -32,9 +33,14 @@ HEROはユーザー提供の実店舗写真から、AIで着席しているお�
 https://drive.google.com/file/d/1iD8B76slky0qb4IS0g8kBnzaLPSK5oak/view
 元写真の辛味噌トッピングも残しています。営業時間はドリンク・デザートメニューv28に合わせ、日〜金9:00〜17:30（L.O.17:00）、土9:00〜19:30（L.O.19:00）に修正済みです。
 Featured DishはPork Katsu Classic Omurice（$21.95）。料理名・説明・価格の根拠はフードメニューr18のPork Katsu Classicです。特集には既存のカツのせオムライス写真を使用しています。
-本番では確認用のnoindex・robots.txtを見直します。
+確認サイトでは検索除外を維持し、本番ではnoindexを外しrobots.txtでクロールを許可済みです。
 
 たたき台: https://cafe-itadaki-clean.michiya65371.chatgpt.site/
 
 料理一覧はオムライス・カレー・ラーメンの順です。オムライスはカツなしの写真を使用し、原本は共有Driveの10-3 Classic Omurice Plain_Angle.pngです：
 https://drive.google.com/file/d/1TEU-kriMQ_jZSTg2xOZHhhgtMf_ivDyf/view
+
+## オーナー向け引き継ぎ
+
+- [サイト仕様書](site-specification.md)
+- [編集と公開の手順](owner-editing-guide.md)
