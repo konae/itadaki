@@ -1,5 +1,11 @@
 # Photo retouching notes
 
+Current first food card: classic omurice without katsu. Source: Drive `1TEU-kriMQ_jZSTg2xOZHhhgtMf_ivDyf`, preserved as omurice-plain-source.jpg; derivative: omurice-plain-retouched.jpg.
+
+## Plain omurice prompt
+
+Use case: precise-object-edit and lighting-weather. Image 1 is the EDIT TARGET: actual Café Itadaki classic omurice with NO cutlet or meat topping. Image 2 is a STYLE REFERENCE ONLY for warm light-oak tabletop and soft window daylight. Retouch image 1 for the same restaurant website food-card series, portrait 4:5. Preserve the exact actual fluffy, irregular scrambled-style egg over rice, red ketchup stripes, shredded cabbage side, white plate and food quantities. Do not convert the egg into a closed smooth omelet, do not add pork katsu, any meat, garnish, sauce or ingredients. Replace only metal kitchen counter and all background clutter with the quiet light-oak table matching image 2. Natural appetizing egg texture, soft warm daylight with neutral whites, no hard flash, no oversaturation or plastic gloss. Plate fills about 75% of frame with generous crop-safe margin for a tall card. No text, logos, cutlery or props. Faithful photographic retouching, not a different dish.
+
 Current third food card: Ramen. Source is Drive file `1iD8B76slky0qb4IS0g8kBnzaLPSK5oak` (12-2 Spicy Chashu Miso_Angle.png); preserved as ramen-source.jpg. Published derivative: ramen-retouched.jpg. The original photograph includes the red spicy-miso dollop.
 
 ## Ramen prompt
