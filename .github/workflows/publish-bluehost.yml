@@ -1,0 +1,78 @@
+name: Publish reviewed website to Bluehost
+
+on:
+  push:
+    branches: [main]
+    paths: ['.publication-request.json']
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: Full SHA of the reviewed website commit
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: itadaki-bluehost-production
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Read publication request
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Validate reviewed version
+        id: reviewed
+        env:
+          MANUAL_COMMIT: ${{ inputs.commit }}
+          PUBLICATION_EVENT: ${{ github.event_name }}
+        run: |
+          python3 - <<'PY'
+          import json, os, re, subprocess
+          from pathlib import Path
+          sha = os.environ['MANUAL_COMMIT'] if os.environ['PUBLICATION_EVENT'] == 'workflow_dispatch' else json.loads(Path('.publication-request.json').read_text())['commit']
+          if not isinstance(sha, str) or not re.fullmatch(r'[0-9a-f]{40}', sha):
+              raise SystemExit('Publication requires the full reviewed commit SHA')
+          subprocess.run(['git', 'merge-base', '--is-ancestor', sha, 'HEAD'], check=True)
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('commit=' + sha + '\n')
+          PY
+      - name: Load the reviewed website
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ steps.reviewed.outputs.commit }}
+          path: reviewed
+          persist-credentials: false
+      - name: Prepare public files
+        run: python3 automation/publish_bluehost.py prepare --root reviewed --output "$RUNNER_TEMP/itadaki-publication"
+      - name: Back up current public files
+        env:
+          BLUEHOST_FTP_PASSWORD: ${{ secrets.BLUEHOST_FTP_PASSWORD }}
+        run: python3 automation/publish_bluehost.py backup --output "$RUNNER_TEMP/itadaki-publication"
+      - name: Preserve backup before changing production
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: bluehost-before-${{ github.run_id }}
+          path: ${{ runner.temp }}/itadaki-publication/backup
+          if-no-files-found: error
+          retention-days: 30
+      - name: Publish and verify the reviewed files
+        env:
+          BLUEHOST_FTP_PASSWORD: ${{ secrets.BLUEHOST_FTP_PASSWORD }}
+        run: python3 automation/publish_bluehost.py deploy --output "$RUNNER_TEMP/itadaki-publication"
+      - name: Preserve publication manifest
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: bluehost-publication-${{ github.run_id }}
+          path: ${{ runner.temp }}/itadaki-publication/manifest.json
+          if-no-files-found: ignore
+          retention-days: 30
