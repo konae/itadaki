@@ -21,12 +21,12 @@ Read the resulting workflow run and confirm success; a successful request-file w
 ## Transfer and recovery
 
 1. Validate the request and check out the reviewed SHA.
-2. Run the static site's validation. Package only linked static assets and production robots.txt, removing the preview noindex meta tag.
+2. Run the static site's validation. Package the approved homepage and the existing `/catering/`, `/offers/`, and `/delivery/` pages, their linked static assets, and production robots.txt; remove preview noindex meta tags from every published HTML page. Do not package private documentation or other HTML drafts.
 3. Connect through certificate-validated explicit FTPS and confirm the existing server prefers index.html.
 4. Back up current public files. Legacy PHP files and private server settings are never included.
 5. Save the backup as a GitHub Actions artifact before allowing production writes. Artifacts are retained for 30 days and are not a permanent archive.
 6. Verify unchanged production state, upload temporary files, read them back, and rename assets before index.html.
-7. Verify the live site's bytes over HTTPS. Restore overwritten files from the backup if publication or public verification fails. A broken FTPS connection may require manual recovery using the saved artifact. Newly added, unreferenced assets may remain after recovery.
+7. Verify the live site's bytes over HTTPS, including clean directory URLs (`/catering/`, `/offers/`, `/delivery/`). Restore overwritten files and remove newly added files if publication or public verification fails. A broken FTPS connection may require manual recovery using the saved artifact. Empty newly created directories may remain.
 
 No remote directory cleanup or deletion of WordPress files is performed. The existing .htaccess is read only; its DirectoryIndex setup was done during the original manual publication.
 
