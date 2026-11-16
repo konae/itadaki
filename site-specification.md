@@ -116,3 +116,12 @@ GitHubのmainを更新すると、GitHub Pagesの確認サイトが更新され�
 ChatGPTの同じワークスペースを使っていることだけでは、オーナー側の編集・公開接続が完了したことにはなりません。
 
 残る確認は、オーナーが共有PJに参加し、Driveへの素材保存、GitHubへの変更保存、確認サイトの確認、本番反映までを実行できることです。共有PJの資料には、仕様・編集手順・写真の判断記録・AIの作業ルールを引き継いでいます。
+
+## 2026-11-16: 3つのURLを確認サイトに先行準備
+- `/catering/` — ケータリング問い合わせ案内。提供内容・価格は確定させず、`info@itadakiboston.com`へのメールリンク。
+- `/offers/` — 将来の特別オファー・Toastメール配信用にGoogleフォーム等の登録欄を用意する場所。現在は準備中案内のみで、アドレスを収集しない。
+- `/delivery/` — DoorDashとGrubhubへの注文リンク。Toastは持ち帰り注文用として案内。
+- GitHub Pages確認URLは`https://konae.github.io/itadaki/<slug>/`。本番URL `https://itadakiboston.com/<slug>/` は現時点で未公開。QRに使用する本番URLのパスを先に確定する目的。
+- 通常編集のため、`.publication-request.json`は変更しない。
+- **本番反映前の技術課題:** `automation/publish_bluehost.py`の`prepare()`は現状トップページから参照されるファイルを収集する設計。3ディレクトリの新規ページと`landing.css`を本番パッケージへ含め、未作成ディレクトリのバックアップ確認と各HTMLのrobots設定を適切に処理するよう、公開依頼の際に調整・テストが必要。
+- `/offers/` は過去の共有PJ会話にある「Google FormでHP内の登録完結、Toast配信リストへ手動移行」の予定を継承。フォームURLや送信・同意文面は未設定。

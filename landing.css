@@ -1,0 +1,22 @@
+/* Preview landing pages; relative links work on GitHub Pages and Bluehost. */
+.landing-body { background:#f8faf8; min-height:100vh; }
+.landing-header { height:94px; padding:0 clamp(20px,5vw,90px); display:flex; align-items:center; justify-content:space-between; background:#fff; border-bottom:1px solid #e2e9e3; }
+.landing-logo { display:flex; align-items:center; gap:14px; font:19px Georgia,serif; }
+.landing-logo img { width:70px; height:70px; object-fit:contain; }
+.landing-back { font-size:12px; letter-spacing:.06em; padding-bottom:5px; border-bottom:1px solid #8e9e91; }
+.landing-main { max-width:1220px; min-height:calc(100vh - 270px); padding:clamp(65px,10vw,150px) 5vw 100px; margin:auto; display:grid; grid-template-columns:1.3fr .8fr; gap:clamp(40px,8vw,125px); align-items:center; }
+.landing-kicker { color:#64746a; font-size:11px; letter-spacing:.25em; font-weight:700; }
+.landing-title { font:normal clamp(54px,7vw,94px)/1.03 Georgia,serif; letter-spacing:-.045em; margin:24px 0 34px; }
+.landing-lead { max-width:570px; font:normal clamp(20px,2.4vw,26px)/1.55 Georgia,serif; color:#3b5042; margin-bottom:22px; }
+.landing-detail { max-width:560px; line-height:1.85; color:#68746b; font-size:15px; }
+.landing-cta-group { display:flex; flex-wrap:wrap; gap:14px; margin-top:35px; }
+.landing-cta { background:#244b36; color:#fff; padding:17px 23px; font-size:13px; display:inline-flex; gap:24px; justify-content:space-between; align-items:center; }
+.landing-cta.secondary { background:transparent; border:1px solid #aebfb1; color:#244b36; }
+.landing-card { background:#e9f0e9; padding:45px 40px; align-self:stretch; display:flex; flex-direction:column; justify-content:center; }
+.landing-card h2 { font:normal 27px/1.22 Georgia,serif; margin:18px 0; }
+.landing-card p { color:#67786d; font-size:13px; line-height:1.8; }
+.landing-card .fineprint { border-top:1px solid #bdccbf; padding-top:20px; margin-top:45px; font-size:11px; }
+.landing-footer { border-top:1px solid #e1e8e2; display:flex; justify-content:space-between; gap:20px; padding:30px 5vw 40px; color:#68766b; font-size:12px; }
+.landing-footer a { text-decoration:underline; text-underline-offset:4px; }
+.landing-body a:focus-visible { outline:3px solid #a56c45; outline-offset:4px; }
+@media(max-width:800px) { .landing-header{height:76px;} .landing-logo img{width:56px;height:56px;} .landing-logo span{font-size:16px;} .landing-main{display:block;padding:75px 25px;} .landing-card{margin-top:65px;padding:40px 28px;} .landing-title{font-size:clamp(48px,13vw,76px);} .landing-footer{display:block;padding:28px 25px 45px;} .landing-footer p{margin-bottom:12px;} }

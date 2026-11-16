@@ -46,3 +46,10 @@ Edit target: actual pork katsu omurice, fluffy scrambled-style yellow egg with c
 - Web-optimized derivative: `hero-itadaki-watercolor-20261116.jpg`, progressive JPEG quality 86 from the approved PNG, preserving its original aspect ratio, no second AI edit.
 - Drive source/master ID: `1BGyCoh9N8qMhZqz3hFoTxp8GCWrDOkT4`; published JPEG ID: `1QTZ4XJF4wDTg5uvCTgKi2rhUOogB4qGn`. Both saved under the website's site-assets folder, recorded in the private Drive asset register.
 - The existing photographic `hero-cafe-interior-no-customers.jpg` remains unchanged and available for rollback. Do not use this stylized artwork as evidence of exact equipment or operating conditions.
+
+## Matcha signature supplier photo — 2026-11-16 (preview, external source)
+- The café owner selected the Yuicha / Tagashira Tea Quality page and confirmed permission to use its photography for the website.
+- Preview photo URL: `https://www.yuicha.jp/english/quality/images/202504/img02.jpg` (Tea Leaves photograph linked from `https://www.yuicha.jp/english/quality/`).
+- The supplier photo replaces the unrelated onigiri sample in the signature section, and carries a visible Yuicha / Tagashira Tea attribution linking to the supplier.
+- **Asset archival pending:** direct retrieval of the photo file from the supplier site did not succeed in this environment, so the current preview references the supplier's hosted image rather than a local copy. This is an exception to the usual self-hosted-asset policy; do not claim the original is saved to Drive. Verify image loading in a real browser and obtain a copy of the source file before permanent publication. If hotlinking is unavailable, request the approved photo file from the café or supplier.
+- No invented product photos or new retouching were performed; the original `hands.png` remains in the repository for rollback.
