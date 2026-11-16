@@ -37,3 +37,12 @@ Edit target: actual pork katsu omurice, fluffy scrambled-style yellow egg with c
 - Published asset: hero-cafe-interior-no-customers.jpg.
 - Built-in image generation edit: remove the two seated customers and reconstruct the empty seating area. Preserve staff behind the counter, architecture, teal counter, lighting, signs and framing.
 - Prompt: Remove only the two seated customers at the middle-left table, including legs and feet; naturally reconstruct the chairs, table surface, wall and floor. Preserve the staff member behind the counter and the cafe interior, lighting, colors, signs and composition. No redesign or added objects.
+
+## HERO watercolor-and-ink illustration — 2026-11-16
+- Approved by the café owner as the new preview hero artwork, replacing the photographic hero only in the displayed page; the earlier photographic asset stays in the repository and Drive.
+- Real-world source: user-supplied photograph of the actual Café Itadaki interior (with the teal counter, ceiling beam, pendant lights, seating, hexagonal plant shelves and staff behind the counter). The approved image is a stylized AI-generated illustration, **not a literal photograph**; minor artistic simplifications may occur.
+- Image-generation direction: airy pastel watercolor washes, fine hand-drawn ink outlines, cream-colored textured paper, warm lighting and a preserved teal counter and Café Itadaki room layout.
+- Generated full-size PNG: `hero-watercolor-illustration-original-20261116.png` (Google Drive original/processing master, not a published site asset).
+- Web-optimized derivative: `hero-itadaki-watercolor-20261116.jpg`, progressive JPEG quality 86 from the approved PNG, preserving its original aspect ratio, no second AI edit.
+- Drive source/master ID: `1BGyCoh9N8qMhZqz3hFoTxp8GCWrDOkT4`; published JPEG ID: `1QTZ4XJF4wDTg5uvCTgKi2rhUOogB4qGn`. Both saved under the website's site-assets folder, recorded in the private Drive asset register.
+- The existing photographic `hero-cafe-interior-no-customers.jpg` remains unchanged and available for rollback. Do not use this stylized artwork as evidence of exact equipment or operating conditions.
