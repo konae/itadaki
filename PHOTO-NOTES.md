@@ -53,3 +53,12 @@ Edit target: actual pork katsu omurice, fluffy scrambled-style yellow egg with c
 - The supplier photo replaces the unrelated onigiri sample in the signature section, and carries a visible Yuicha / Tagashira Tea attribution linking to the supplier.
 - **Asset archival pending:** direct retrieval of the photo file from the supplier site did not succeed in this environment, so the current preview references the supplier's hosted image rather than a local copy. This is an exception to the usual self-hosted-asset policy; do not claim the original is saved to Drive. Verify image loading in a real browser and obtain a copy of the source file before permanent publication. If hotlinking is unavailable, request the approved photo file from the café or supplier.
 - No invented product photos or new retouching were performed; the original `hands.png` remains in the repository for rollback.
+
+## 2026-11-16 — Yuicha matcha image local final (supersedes prior hotlink/pending note)
+
+- Source: Owner-uploaded `image.png`, showing green matcha in a dark bowl with Yuicha / Tagashira Tea logo. Owner previously granted permission to use Yuicha imagery on the website.
+- Source original kept byte-for-byte in Google Drive photo-originals folder as `20261116-yuicha-matcha-supplier-original.png` (Drive file `1cbRay3_TZQxH39Np7ra2677HTZQPwRaa`; SHA-256 `2c481b8526af8b45a584ed599f0e3b14b2a772a5b3517c4406fb23e6c5c43572`; 858447 bytes).
+- Derived website photo saved in Google Drive published-assets folder as `yuicha-matcha-supplier-20261116.jpg` (Drive file `1e1-IR113af8s_gmh3YRks11dcttfDqPz`; SHA-256 `54bb9f26217cadb8b30a5a7ea778be6b377ee3cfaaaf3aa272ea4a059665fb91`; 93460 bytes). Google Drive raw-file reads of both assets were byte-identical to the local originals.
+- Processing: original RGBA image composited on near-black (to handle any alpha) and encoded as progressive optimized JPEG at quality 88. No resizing or cropping; 1406x454 format remains intact, with supplier logo preserved.
+- Displayed in `index.html` via the repo-local file rather than relying on a third-party hotlink. Section layout was adjusted to show the full panoramic image above the text. Credit link to `https://www.yuicha.jp/english/quality/` remains visible.
+- Supersedes the earlier "asset archival pending" entry and external photo reference. The owner also confirmed `info@itadakiboston.com` for catering and asked to avoid displaying phone numbers; the home footer and catering preview are now email-focused.
