@@ -118,7 +118,7 @@ ChatGPTの同じワークスペースを使っていることだけでは、オ�
 残る確認は、オーナーが共有PJに参加し、Driveへの素材保存、GitHubへの変更保存、確認サイトの確認、本番反映までを実行できることです。共有PJの資料には、仕様・編集手順・写真の判断記録・AIの作業ルールを引き継いでいます。
 
 ## 2026-11-16: 3つのURLを確認サイトに先行準備
-- `/catering/` — ケータリング問い合わせ案内。提供内容・価格は確定させず、`info@itadakiboston.com`へのメールリンク。
+- `/catering/` — ケータリング問い合わせ案内。提供内容・価格は確定させず、既存のサイトで確認済みの電話番号 `(617) 860-4051` への連絡導線。先に設定された `info@itadakiboston.com` は出典未確認のため削除。
 - `/offers/` — 将来の特別オファー・Toastメール配信用にGoogleフォーム等の登録欄を用意する場所。現在は準備中案内のみで、アドレスを収集しない。
 - `/delivery/` — DoorDashとGrubhubへの注文リンク。Toastは持ち帰り注文用として案内。
 - GitHub Pages確認URLは`https://konae.github.io/itadaki/<slug>/`。本番URL `https://itadakiboston.com/<slug>/` は現時点で未公開。QRに使用する本番URLのパスを先に確定する目的。
