@@ -39,6 +39,9 @@ class PublicationTests(unittest.TestCase):
             output = Path(temporary)
             (output / 'release').mkdir()
             (output / 'backup').mkdir()
+            settings = b'DirectoryIndex index.html index.php\n'
+            (output / 'backup/htaccess-before.backup').write_bytes(settings)
+            (output / 'planned-htaccess').write_bytes(settings)
             names = ['index.html', 'hero.jpg']
             old = {name: ('old ' + name).encode() for name in names}
             new = {name: ('new ' + name).encode() for name in names}
@@ -47,14 +50,14 @@ class PublicationTests(unittest.TestCase):
                 (output / 'backup' / name).write_bytes(old[name])
             (output / 'manifest.json').write_text(json.dumps({'commit': 'a' * 40, 'files': {n: publication.digest(v) for n, v in new.items()}}))
             (output / 'backup/manifest.json').write_text(json.dumps({n: publication.digest(v) for n, v in old.items()}))
-            server = dict(old)
+            server = {**old, '.htaccess': settings}
             class Connection:
                 def close(self):
                     pass
             with patch.object(publication, 'connect', return_value=Connection()), patch.object(publication, 'get', side_effect=lambda f, n: server[n]), patch.object(publication, 'put', side_effect=lambda f, n, d: server.__setitem__(n, d)), patch.object(publication, 'verify_public', side_effect=RuntimeError('simulated public failure')):
                 with self.assertRaises(RuntimeError):
                     publication.deploy(output)
-            self.assertEqual(server, old)
+            self.assertEqual(server, {**old, '.htaccess': settings})
 
 
     def test_multi_page_package_resolves_parent_links_without_private_files(self):
@@ -126,6 +129,9 @@ class PublicationTests(unittest.TestCase):
             output = Path(temporary)
             (output / 'release' / 'catering').mkdir(parents=True)
             (output / 'backup').mkdir()
+            settings = b'DirectoryIndex index.html index.php\n'
+            (output / 'backup/htaccess-before.backup').write_bytes(settings)
+            (output / 'planned-htaccess').write_bytes(settings)
             old = {'index.html': b'old homepage'}
             new = {'index.html': b'new homepage', 'catering/index.html': b'new route'}
             (output / 'release/index.html').write_bytes(new['index.html'])
@@ -137,7 +143,7 @@ class PublicationTests(unittest.TestCase):
             (output / 'backup/manifest.json').write_text(json.dumps({
                 'index.html': publication.digest(old['index.html']), 'catering/index.html': None
             }))
-            server = dict(old)
+            server = {**old, '.htaccess': settings}
             class Remote:
                 def delete(self, name):
                     del server[name]
@@ -146,7 +152,51 @@ class PublicationTests(unittest.TestCase):
             with patch.object(publication, 'connect', return_value=Remote()), patch.object(publication, 'get', side_effect=lambda ftp, name: server[name]), patch.object(publication, 'put', side_effect=lambda ftp, name, data: server.__setitem__(name, data)), patch.object(publication, 'verify_public', side_effect=RuntimeError('simulated HTTPS failure')):
                 with self.assertRaisesRegex(RuntimeError, 'simulated HTTPS failure'):
                     publication.deploy(output)
-            self.assertEqual(server, old)
+            self.assertEqual(server, {**old, '.htaccess': settings})
+
+    def test_directory_index_switch_from_verified_legacy_redirect(self):
+        before = b'# existing config\nDirectoryIndex index.php index.html\n# preserve\n'
+        php = b'<?php header("Location: https://www.instagram.com/cafeitadaki.boston/"); exit; ?>'
+        expected = b'# existing config\nDirectoryIndex index.html index.php\n# preserve\n'
+        self.assertEqual(publication.planned_directory_settings(before, php), expected)
+        self.assertEqual(publication.planned_directory_settings(expected), expected)
+        with self.assertRaisesRegex(RuntimeError, 'not verified'):
+            publication.planned_directory_settings(before)
+        with self.assertRaisesRegex(RuntimeError, 'not the approved'):
+            publication.planned_directory_settings(before, b'<?php header("Location: https://example.com/"); ?>')
+        with self.assertRaisesRegex(RuntimeError, 'Unsupported'):
+            publication.planned_directory_settings(b'DirectoryIndex index.php\n', php)
+
+    def test_failed_publication_restores_instagram_redirect_configuration(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            (output / 'release' / 'offers').mkdir(parents=True)
+            (output / 'backup').mkdir()
+            previous_settings = b'DirectoryIndex index.php index.html\n'
+            desired_settings = b'DirectoryIndex index.html index.php\n'
+            (output / 'backup/htaccess-before.backup').write_bytes(previous_settings)
+            (output / 'planned-htaccess').write_bytes(desired_settings)
+            new = {'index.html': b'new html', 'offers/index.html': b'new offers'}
+            old = {'index.html': b'old html'}
+            for name, data in new.items():
+                (output / 'release' / name).write_bytes(data)
+            (output / 'backup/index.html').write_bytes(old['index.html'])
+            (output / 'manifest.json').write_text(json.dumps({
+                'commit': 'a' * 40, 'files': {name: publication.digest(data) for name, data in new.items()}
+            }))
+            (output / 'backup/manifest.json').write_text(json.dumps({
+                'index.html': publication.digest(old['index.html']), 'offers/index.html': None
+            }))
+            server = {**old, '.htaccess': previous_settings}
+            class Remote:
+                def delete(self, name):
+                    del server[name]
+                def close(self):
+                    pass
+            with patch.object(publication, 'connect', return_value=Remote()), patch.object(publication, 'get', side_effect=lambda ftp, name: server[name]), patch.object(publication, 'put', side_effect=lambda ftp, name, data: server.__setitem__(name, data)), patch.object(publication, 'verify_public', side_effect=RuntimeError('simulated HTTPS failure')):
+                with self.assertRaisesRegex(RuntimeError, 'simulated HTTPS failure'):
+                    publication.deploy(output)
+            self.assertEqual(server, {**old, '.htaccess': previous_settings})
 
     def test_missing_password_does_not_connect(self):
         with patch.dict(publication.os.environ, {}, clear=True), patch.object(publication.ftplib, 'FTP_TLS') as ftp:

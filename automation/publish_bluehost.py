@@ -20,6 +20,30 @@ ALLOWED = {'.html', '.css', '.jpg', '.jpeg', '.png', '.webp', '.avif', '.gif',
 
 # Explicitly approved website routes. Do not package unreviewed HTML by directory glob.
 PUBLIC_PAGES = ('index.html', 'catering/index.html', 'offers/index.html', 'delivery/index.html')
+DIRECTORY_INDEX = re.compile(rb'(?m)^([ \t]*DirectoryIndex[ \t]+)([^\r\n]+)')
+INSTAGRAM_TARGET = re.compile(rb'https?://(?:www\.)?instagram\.com/cafeitadaki\.boston/?', re.I)
+
+
+def planned_directory_settings(before, legacy_php=None):
+    """Plan an index.html-first switch, but only from a verified known site mode."""
+    matches = list(DIRECTORY_INDEX.finditer(before))
+    if len(matches) != 1:
+        raise RuntimeError('Expected exactly one DirectoryIndex declaration')
+    match = matches[0]
+    indexes = match.group(2).decode('ascii').split()
+    if not indexes:
+        raise RuntimeError('Empty DirectoryIndex')
+    if indexes[0] == 'index.html':
+        return before
+    if indexes[0] != 'index.php' or 'index.html' not in indexes:
+        raise RuntimeError('Unsupported server DirectoryIndex configuration')
+    source = (legacy_php or b'').decode('utf-8', errors='replace')
+    if '<?php' not in source or not re.search(r'header\s*\(.*?Location\s*:', source, re.I | re.S):
+        raise RuntimeError('Legacy index.php redirect was not verified')
+    if not INSTAGRAM_TARGET.search(legacy_php or b''):
+        raise RuntimeError('Legacy index.php is not the approved Instagram redirect')
+    reordered = ['index.html'] + [name for name in indexes if name != 'index.html']
+    return before[:match.start(2)] + ' '.join(reordered).encode('ascii') + before[match.end(2):]
 
 
 def digest(data):
@@ -153,9 +177,13 @@ def backup(output):
     manifest = json.loads((output / 'manifest.json').read_text())
     ftp = connect()
     try:
-        settings = get(ftp, '.htaccess').decode()
-        if not re.search(r'^DirectoryIndex\s+index\.html(?:\s|$)', settings, re.M):
-            raise RuntimeError('Server must prefer index.html before automated publication')
+        settings = get(ftp, '.htaccess')
+        declarations = list(DIRECTORY_INDEX.finditer(settings))
+        if len(declarations) != 1:
+            raise RuntimeError('Unexpected server DirectoryIndex configuration')
+        indexes = declarations[0].group(2).split()
+        legacy_php = get(ftp, 'index.php') if indexes and indexes[0] == b'index.php' else None
+        desired_settings = planned_directory_settings(settings, legacy_php)
         existing = {}
         for name in manifest['files']:
             try:
@@ -174,7 +202,9 @@ def backup(output):
             existing[name] = digest(data)
         (output / 'backup').mkdir(exist_ok=True)
         (output / 'backup' / 'manifest.json').write_text(json.dumps(existing, indent=2) + '\n')
-        print('Backed up existing public files. Legacy PHP and private settings are excluded.')
+        (output / 'backup' / 'htaccess-before.backup').write_bytes(settings)
+        (output / 'planned-htaccess').write_bytes(desired_settings)
+        print('Backed up public files and server index setting before publication; legacy PHP was not modified.')
     finally:
         ftp.close()
 
@@ -227,11 +257,16 @@ def verify_public(output, manifest):
 def deploy(output):
     manifest = json.loads((output / 'manifest.json').read_text())
     before = json.loads((output / 'backup' / 'manifest.json').read_text())
+    before_settings = (output / 'backup' / 'htaccess-before.backup').read_bytes()
+    desired_settings = (output / 'planned-htaccess').read_bytes()
     names = sorted(set(manifest['files']) - {'index.html'}) + ['index.html']
     changed = []
+    settings_changed = False
     ftp = connect()
     try:
         # Refuse deployment if the server changed after the backup was captured.
+        if get(ftp, '.htaccess') != before_settings:
+            raise RuntimeError('Server index settings changed after backup')
         for name, previous in before.items():
             if previous is not None and digest(get(ftp, name)) != previous:
                 raise RuntimeError('Production changed since backup; review again')
@@ -245,10 +280,24 @@ def deploy(output):
                 changed.append(name)
                 put(ftp, name, data)
                 print('Published and verified:', name)
+            # The previous Instagram redirect stays active until all files are transferred.
+            if desired_settings != before_settings:
+                settings_changed = True
+                put(ftp, '.htaccess', desired_settings)
+                if get(ftp, '.htaccess') != desired_settings:
+                    raise RuntimeError('Server index switch was not verified')
+                print('Switched homepage from the verified legacy redirect to index.html.')
             verify_public(output, manifest)
         except Exception as publish_error:
-            # Restore assets first, then the homepage; remove newly published files as well.
+            # Restore the former redirect first, then original assets and homepage.
             recovery_errors = []
+            if settings_changed:
+                try:
+                    put(ftp, '.htaccess', before_settings)
+                    if get(ftp, '.htaccess') != before_settings:
+                        raise RuntimeError('Server index rollback did not verify')
+                except Exception as error:
+                    recovery_errors.append(f'.htaccess: {error}')
             for name in sorted(set(changed) - {'index.html'}) + (['index.html'] if 'index.html' in changed else []):
                 try:
                     if before.get(name) is None:
@@ -263,7 +312,7 @@ def deploy(output):
                     recovery_errors.append(f'{name}: {error}')
             if recovery_errors:
                 raise RuntimeError('Publication failed; recovery incomplete: ' + '; '.join(recovery_errors)) from publish_error
-            print('Restored old public files and removed newly published files.')
+            print('Restored prior server settings and public files; removed newly published files.')
             raise
         print('Publication successful:', manifest['commit'])
     finally:
